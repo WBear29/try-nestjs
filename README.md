@@ -129,3 +129,27 @@ endif
     this.hogeService.something(id);
   }
   ```
+
+### TypeORM
+* @Entityデコレータをつけたクラスとして定義
+* カラムは@PrimaryGeneratedColumnや@Columnデコレータをつけることでマッピング可能
+  ```typescript
+  @Entity()
+  export class User {
+    @PrimaryGeneratedColumn('uuid')
+    id: string
+
+    @Column()
+    name: string
+  }
+  ```
+* Entityを管理するためにRepositoryオブジェクトを定義する
+* クラスに@EntityRepository()デコレータをつけ、Repositoryを継承して定義
+  ```typescript
+  @EntityRepository(User)
+  export class UserRepository extends Repository<User> {
+    findById(id: string) {
+      return this.findById(id);
+    }
+  }
+  ```
