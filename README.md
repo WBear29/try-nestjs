@@ -49,7 +49,7 @@ endif
   $ nest g module <name>
   ```
 
-## Controller
+### Controller
 * ルーティング機能
   * クライアントからのリクエストを受け取り、レスポンスを返す
 * 特定のパスとControllerが紐づけられる
@@ -74,7 +74,7 @@ endif
     $ nest g controller <name> --no-spec
     ```
 
-## Service
+### Service
 * ビジネスロジックを書く
 * Controllerから呼び出し、ユースケース層として利用
   * DIコンテナによる依存性の注入が可能
@@ -111,3 +111,21 @@ endif
         }
       }
       ```
+
+### Pipe
+* ハンドラーがリクエストを受け取る前に処理を行う
+  * バリデーションなどを実行可能
+    * ValidationPipe: バリデーション
+    * ParseIntPipe: 入力を整数型に変換
+    * ParseBoolPipe: 入力をBoolean型に変換
+    * ParseUUIDPipe: 入力をUUID型に変換
+    * DefaultValuePipe: 入力がnull, undefinedの場合にデフォルト値を設定
+* データの変換&バリデーションが可能
+  ```typescript
+  @Post()
+  something(
+    @Body('id', ParseUUIDPipe) id: string,
+  ) {
+    this.hogeService.something(id);
+  }
+  ```
