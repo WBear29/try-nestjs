@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -22,7 +23,7 @@ export class TeatureController {
   }
 
   @Get(':id')
-  findById(@Param('id') id: string): Teature {
+  findById(@Param('id', ParseUUIDPipe) id: string): Teature {
     return this.teatureService.findById(id);
   }
 
@@ -32,12 +33,12 @@ export class TeatureController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string): Teature {
+  update(@Param('id', ParseUUIDPipe) id: string): Teature {
     return this.teatureService.updateStatus(id);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string): void {
+  delete(@Param('id', ParseUUIDPipe) id: string): void {
     return this.teatureService.delete(id);
   }
 }

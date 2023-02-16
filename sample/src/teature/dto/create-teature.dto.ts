@@ -1,5 +1,12 @@
+import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+
 export class CreateTeatureDto {
-  id: string;
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(40)
   name: string;
+
+  @IsString()
+  @IsNotEmpty()
   email: string;
 }

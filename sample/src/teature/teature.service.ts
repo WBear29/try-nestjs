@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid';
+
 import { Injectable } from '@nestjs/common';
 
 import { CreateTeatureDto } from './dto/create-teature.dto';
@@ -17,6 +19,7 @@ export class TeatureService {
 
   create(createTeatureDto: CreateTeatureDto): Teature {
     const teature: Teature = {
+      id: uuid(),
       ...createTeatureDto,
       status: TeatureStatus.Rest,
     };
