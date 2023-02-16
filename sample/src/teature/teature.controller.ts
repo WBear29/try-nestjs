@@ -8,6 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 
+import { CreateTeatureDto } from './dto/create-teature.dto';
 import { TeatureStatus } from './teature-status.enum';
 import { Teature } from './teature.model';
 import { TeatureService } from './teature.service';
@@ -26,18 +27,8 @@ export class TeatureController {
   }
 
   @Post()
-  create(
-    @Body('id') id: string,
-    @Body('name') name: string,
-    @Body('email') email: string,
-  ): Teature {
-    const teature: Teature = {
-      id,
-      name,
-      email,
-      status: TeatureStatus.Rest,
-    };
-    return this.teatureService.create(teature);
+  create(@Body() createTeatureDto: CreateTeatureDto): Teature {
+    return this.teatureService.create(createTeatureDto);
   }
 
   @Patch(':id')

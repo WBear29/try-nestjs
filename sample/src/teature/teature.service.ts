@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
+import { CreateTeatureDto } from './dto/create-teature.dto';
 import { TeatureStatus } from './teature-status.enum';
 import { Teature } from './teature.model';
 
@@ -14,7 +15,11 @@ export class TeatureService {
     return this.teatures.find((teature) => teature.id === id);
   }
 
-  create(teature: Teature): Teature {
+  create(createTeatureDto: CreateTeatureDto): Teature {
+    const teature: Teature = {
+      ...createTeatureDto,
+      status: TeatureStatus.Rest,
+    };
     this.teatures.push(teature);
     return teature;
   }
