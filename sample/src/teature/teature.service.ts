@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { CreateTeatureDto } from './dto/create-teature.dto';
 import { TeatureStatus } from './teature-status.enum';
@@ -14,7 +14,11 @@ export class TeatureService {
   }
 
   findById(id: string): Teature {
-    return this.teatures.find((teature) => teature.id === id);
+    const found = this.teatures.find((item) => item.id === id);
+    if (!found) {
+      throw new NotFoundException();
+    }
+    return found;
   }
 
   create(createTeatureDto: CreateTeatureDto): Teature {
@@ -28,12 +32,18 @@ export class TeatureService {
   }
 
   updateStatus(id: string): Teature {
-    const teature = this.findById(id);
-    teature.status = TeatureStatus.Contactable;
-    return teature;
+    const found = this.teatures.find((item) => item.id === id);
+    if (!found) {
+      throw new NotFoundException();
+    }
+    found.status = TeatureStatus.Contactable;
+    return found;
   }
 
   delete(id: string): void {
+    if (!this.teatures.find((item) => item.id === id)) {
+      throw new NotFoundException();
+    }
     this.teatures = this.teatures.filter((teature) => teature.id !== id);
   }
 }
