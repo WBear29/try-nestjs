@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.28
+    platform: linux/amd64
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sample
