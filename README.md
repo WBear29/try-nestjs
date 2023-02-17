@@ -162,3 +162,7 @@ cd sample
 // yarnを選択
 yarn start:dev
 ```
+
+## 参考資料
+
+* [TypeORM 0.3系のマイグレーション](https://qiita.com/Aurum64/items/f5962bd2a643447dbef9)
