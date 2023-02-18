@@ -165,4 +165,5 @@ yarn start:dev
 
 ## 参考資料
 
+* [How To Use Prisma with PostgreSQL, SQLite, and MySQL](https://codevoweb.com/how-to-use-prisma-with-postgresql-sqlite-and-mysql/)
 * [TypeORM 0.3系のマイグレーション](https://qiita.com/Aurum64/items/f5962bd2a643447dbef9)

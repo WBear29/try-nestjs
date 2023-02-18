@@ -1,49 +1,44 @@
-import { v4 as uuid } from 'uuid';
-
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Prisma, Teature } from '@prisma/client';
 
-import { CreateTeatureDto } from './dto/create-teature.dto';
-import { TeatureStatus } from './teature-status.enum';
-import { Teature } from './teature.model';
+import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class TeatureService {
-  private teatures: Teature[] = [];
-  getAll(): Teature[] {
-    return this.teatures;
+  constructor(private prisma: PrismaService) {}
+
+  async teature(
+    teatureWhereUniqueInput: Prisma.TeatureWhereUniqueInput,
+  ): Promise<Teature | null> {
+    return this.prisma.teature.findUnique({
+      where: teatureWhereUniqueInput,
+    });
   }
 
-  findById(id: string): Teature {
-    const found = this.teatures.find((item) => item.id === id);
-    if (!found) {
-      throw new NotFoundException();
-    }
-    return found;
+  async teatures(): Promise<Teature[]> {
+    return this.prisma.teature.findMany();
   }
 
-  create(createTeatureDto: CreateTeatureDto): Teature {
-    const teature: Teature = {
-      id: uuid(),
-      ...createTeatureDto,
-      status: TeatureStatus.Rest,
-    };
-    this.teatures.push(teature);
-    return teature;
+  async createTeature(data: Prisma.TeatureCreateInput): Promise<Teature> {
+    return this.prisma.teature.create({
+      data,
+    });
   }
 
-  updateStatus(id: string): Teature {
-    const found = this.teatures.find((item) => item.id === id);
-    if (!found) {
-      throw new NotFoundException();
-    }
-    found.status = TeatureStatus.Contactable;
-    return found;
+  async updateTeature(params: {
+    where: Prisma.TeatureWhereUniqueInput;
+    data: Prisma.TeatureUpdateInput;
+  }): Promise<Teature> {
+    const { where, data } = params;
+    return this.prisma.teature.update({
+      data,
+      where,
+    });
   }
 
-  delete(id: string): void {
-    if (!this.teatures.find((item) => item.id === id)) {
-      throw new NotFoundException();
-    }
-    this.teatures = this.teatures.filter((teature) => teature.id !== id);
+  async deleteTeature(where: Prisma.TeatureWhereUniqueInput): Promise<Teature> {
+    return this.prisma.teature.delete({
+      where,
+    });
   }
 }
