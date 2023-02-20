@@ -38,13 +38,20 @@ export class TeatureController {
     });
   }
 
-  // @Patch(':id')
-  // update(@Param('id', ParseUUIDPipe) id: string): Teature {
-  //   return this.teatureService.updateStatus(id);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateTeatureDto: CreateTeatureDto,
+  ): Promise<Teature> {
+    const { name, email } = updateTeatureDto;
+    return this.teatureService.updateTeature({
+      where: { id },
+      data: { name, email },
+    });
+  }
 
-  // @Delete(':id')
-  // delete(@Param('id', ParseUUIDPipe) id: string): void {
-  //   return this.teatureService.delete(id);
-  // }
+  @Delete(':id')
+  delete(@Param('id', ParseUUIDPipe) id: string): void {
+    this.teatureService.deleteTeature({ id });
+  }
 }
