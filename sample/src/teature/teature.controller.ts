@@ -30,12 +30,12 @@ export class TeatureController {
 
   @Post()
   create(@Body() createTeatureDto: CreateTeatureDto): Promise<Teature> {
-    const data = {
+    const { name, email } = createTeatureDto;
+    return this.teatureService.createTeature({
       id: uuid(),
-      name: createTeatureDto.name,
-      email: createTeatureDto.email,
-    };
-    return this.teatureService.createTeature(data);
+      name,
+      email,
+    });
   }
 
   // @Patch(':id')
