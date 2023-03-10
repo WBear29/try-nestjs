@@ -24,6 +24,7 @@
 
 ## Description
 
+Study From [Udemy NestJS:The Complete Developer's Guide](https://www.udemy.com/course/nestjs-the-complete-developers-guide/)
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation

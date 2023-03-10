@@ -167,3 +167,4 @@ yarn start:dev
 
 * [How To Use Prisma with PostgreSQL, SQLite, and MySQL](https://codevoweb.com/how-to-use-prisma-with-postgresql-sqlite-and-mysql/)
 * [TypeORM 0.3系のマイグレーション](https://qiita.com/Aurum64/items/f5962bd2a643447dbef9)
+* [NestJS: TheComplete Developer's Guide](https://www.udemy.com/course/nestjs-the-complete-developers-guide/)
