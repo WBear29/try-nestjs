@@ -62,6 +62,8 @@ export class HomeResponseDto {
 }
 
 export class Image {
+  @IsString()
+  @IsNotEmpty()
   url: string;
 }
 
